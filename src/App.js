@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import { useEffect, useState } from "react";
+import "./App.css"
+function App(){
+  const [initial,setInitial]=useState(0);
+  const [count,setCount]=useState(0);
+  const [theme,setTheme]=useState(true);
+  const InputHandler=(e)=>{
+    setInitial(e.target.value);
+  }
+  useEffect(()=>{
+    setCount(parseInt(initial));
+  },[initial]);
+  return(
+    <div className={theme?"blue":"red"}>
+      <div className="division">
+      <button onClick={()=>setTheme(!theme)}>Toggle Theme</button>
+      <input type="number" onChange={(e)=>InputHandler(e)}/>
+      <h1>Count: {count}</h1>
+      <button onClick={()=>setCount(count+1)}>Increment</button>
+      </div>
     </div>
-  );
+  )
 }
-
 export default App;
